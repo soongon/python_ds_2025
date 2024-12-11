@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import pandas as pd
 
 headers = {
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
@@ -19,6 +20,7 @@ for product in soup.select('#productList > li'):
         product.select_one('a > dl > dt > img')['src'],
     ])
 
-print(products)
-
+df = pd.DataFrame(products)
+df.to_excel('coupang_list.xlsx', index=False)
+print('ok..')
 
